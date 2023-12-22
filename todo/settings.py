@@ -23,7 +23,7 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
 
 # Application definition
 
@@ -73,8 +73,12 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'b3Ge4eDC3*5AA6a2d5*BE1DDDCf24A3*',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '31484',
     }
 }
 
