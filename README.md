@@ -19,11 +19,16 @@ Run the Django development server:
 python manage.py runserver
 ```
 ## Access the app
-Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+Access the app at - [Todo DRF](https://todo-app-jade-sigma.vercel.app/api/todos/) and [Tags DRF of Todo list items](https://todo-app-jade-sigma.vercel.app/api/tags/) (Credentials are given below).
+
+- **Username:** hisham 
+- **Password:** hnfhnfhnf
+
 
 ## Django Admin
-- **URL:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-- **Credentials:** admin/admin
+- **URL:** [Django Admin URL](https://todo-app-jade-sigma.vercel.app/admin) (Credentials are given below).
+- **Username:** hisham 
+- **Password:** hnfhnfhnf
 
 ## API Endpoints
 - **CREATE:** POST at `/api/todo/`
