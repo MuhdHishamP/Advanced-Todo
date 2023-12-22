@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 SECRET_KEY = (
-    'django-insecure-dfkaz#%wza*&t_^62mjbukzpqbxa$t1w#y1az+dr0aywt4st=#'
+    'django-insecure-dfkaz#%wza*&t_^62mjbukzpqbxa$t1w#y1az+dr0aywt4st=#' # noqa: E501
 )
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,26 +84,26 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': (
-            'django.contrib.auth.password_validation.'
-            'UserAttributeSimilarityValidator'
+            'django.contrib.auth.password_validation.' # noqa: E501
+            'UserAttributeSimilarityValidator' # noqa: E501
         ),
     },
     {
         'NAME': (
-            'django.contrib.auth.password_validation.'
-            'MinimumLengthValidator'
+            'django.contrib.auth.password_validation.' # noqa: E501
+            'MinimumLengthValidator' # noqa: E501
         ),
     },
     {
         'NAME': (
-            'django.contrib.auth.password_validation.'
-            'CommonPasswordValidator'
+            'django.contrib.auth.password_validation.' # noqa: E501
+            'CommonPasswordValidator' # noqa: E501
         ),
     },
     {
         'NAME': (
-            'django.contrib.auth.password_validation.'
-            'NumericPasswordValidator'
+            'django.contrib.auth.password_validation.' # noqa: E501
+            'NumericPasswordValidator' # noqa: E501
         ),
     },
 ]
