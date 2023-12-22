@@ -23,7 +23,7 @@ class TodoDetails(models.Model):
 
         # Check if Due Date is before Timestamp created
         if self.due_date and self.due_date < self.timestamp.date():
-            raise ValidationError("Due Date cannot be before Timestamp created.")
+            raise ValidationError("Due Date cannot be before Timestamp created.") # noqa: E501
 
         # Call the parent class's save method
         super().save(*args, **kwargs)

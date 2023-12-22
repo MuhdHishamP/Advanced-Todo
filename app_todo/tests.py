@@ -42,7 +42,7 @@ class TodoDetailsModelTest(TestCase):
             )
         self.assertEqual(
             context.exception.args[0], "Due Date cannot be before Timestamp created."
-        )
+        )  # noqa: E501
 
     def test_add_tags(self):
         todo = TodoDetails.objects.create(title="Todo with Tags")
