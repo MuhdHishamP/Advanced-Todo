@@ -22,3 +22,27 @@ Run the Django development server:
 
 ```bash
 python manage.py runserver
+```
+# Access the app
+Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+
+## Django Admin
+- **URL:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+- **Credentials:** admin/admin
+
+## API Endpoints
+- **CREATE:** POST at `/api/todo/`
+- **READ one:** GET at `/api/todo/{id}/`
+- **READ all:** GET at `/api/todo/`
+- **UPDATE:** PUT at `/api/todo/{id}/`
+- **DELETE:** DELETE at `/api/todo/{id}/`
+  
+Use Basic Authentication for API requests.
+
+## Testing
+Run tests:
+
+```bash
+python manage.py test
+
+
