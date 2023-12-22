@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tododetails',
             name='tag',
-            field=models.ManyToManyField(blank=True, null=True, to='app_todo.tag'),
+            field=models.ManyToManyField(blank=True, null=True,
+                                           to='app_todo.tag'),  
         ),
     ]
