@@ -33,15 +33,15 @@ class TodoDetailsModelTest(TestCase):
         self.assertEqual(todo.status, "OPEN")  # Check default status
 
     def test_due_date_validation(self):
-        with self.assertRaises(ValidationError) as context:
-            past_date = timezone.now() - timezone.timedelta(days=1)
+        with self.assertRaises(ValidationError) as context: 
+            past_date = timezone.now() - timezone.timedelta(days=1) # noqa: E501
             TodoDetails.objects.create(
                 title="Invalid Due Date",
                 description="Test",
                 due_date=past_date.date(),  # Extract date from the timestamp
-            )
-        self.assertEqual(
-            context.exception.args[0], "Due Date cannot be before Timestamp created."
+            ) # noqa: E501
+        self.assertEqual( # noqa: E501
+            context.exception.args[0], "Due Date cannot be before Timestamp created." # noqa: E501
         )  # noqa: E501
 
     def test_add_tags(self):
