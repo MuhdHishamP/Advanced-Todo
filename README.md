@@ -1,4 +1,4 @@
-# Django To-Do List App
+# AlgoBulls Backend Developer (Web) Coding Assignment - Django To-Do List App
 
 ## Overview
 
