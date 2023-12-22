@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the backend code for a simple To-Do List application implemented using Django. I have deployed the Postgres database on Railway and the Django app on Vercel to complete this project.
+This repository contains the backend code for a simple To-Do List application implemented using Django.  I have used Postgres database for this project. I have also deployed the Postgres database on Railway and the Django app on Vercel to complete this project.
 
 
 ## Installation
