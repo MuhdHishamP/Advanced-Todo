@@ -40,7 +40,7 @@ Access the app at - [Todo DRF](https://todo-app-jade-sigma.vercel.app/api/todos/
 - **DELETE a Todo item:** DELETE at `/tags/{id}/`
 
   
-Use Basic Authentication for API requests.
+Used Basic Authentication for API requests.
 
 ## Coverage Summary
 
@@ -50,7 +50,7 @@ Use Basic Authentication for API requests.
 
 
 ## Testing
-Run tests:
+Run tests using:
 
 ```bash
 python manage.py test
@@ -58,7 +58,7 @@ python manage.py test
 
 # Continuous Integration
 
-GitHub Actions automatically run tests and linting on every commit push.
+GitHub Actions are used to automatically run tests and linting on every commit push.
 
 
 
