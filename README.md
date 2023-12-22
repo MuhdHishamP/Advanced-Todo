@@ -44,5 +44,15 @@ Run tests:
 
 ```bash
 python manage.py test
+```
+
+# Continuous Integration
+
+GitHub Actions automatically run tests and linting on every commit push.
+
+# Deployment
+
+To deploy the app, host it on any cloud service provider.
+
 
 
