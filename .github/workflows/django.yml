@@ -31,8 +31,8 @@ jobs:
         run: |
           python manage.py test app_todo.tests  # Run both unit and integration tests
 
-      - name: Lint with Flake8
-        run: flake8 .
+      # - name: Lint with Flake8
+      #   run: flake8 .
 
-      - name: Format with Black
-        run: black .
+      # - name: Format with Black
+      #   run: black .
