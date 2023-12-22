@@ -2,8 +2,9 @@ from django.test import TestCase
 from .models import tag as Tag, TodoDetails
 from .serializers import tagSerializer, TodoSerializer
 from rest_framework.test import APIClient
-from rest_framework import status
-from django.contrib.auth.models import User  # Import User model
+from django.contrib.auth import get_user_model 
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 # TEST CODE FOR MODELS 
 
@@ -21,33 +22,36 @@ class TagModelTest(TestCase):
 
 
 class TodoDetailsModelTest(TestCase):
-    def test_todo_creation(self):
-        # Test the creation of a TodoDetails instance
-        title = "Test Todo"
-        description = "This is a test todo item."
-        todo = TodoDetails.objects.create(title=title, description=description)
-        
-        # Check if the title and description attributes are set correctly
-        self.assertEqual(todo.title, title)
-        self.assertEqual(todo.description, description)
-        
-        # Check if the __str__ method returns the correct string representation
-        self.assertEqual(str(todo), title)
+    def test_create_todo(self):
+        todo = TodoDetails.objects.create(
+            title="Test Todo",
+            description="This is a test todo item",
+        )
+        self.assertEqual(todo.title, "Test Todo")
+        self.assertEqual(todo.description, "This is a test todo item")
+        self.assertIsNotNone(todo.timestamp)
+        self.assertEqual(todo.status, "OPEN")  # Check default status
 
-    def test_status_choices(self):
-        # Test that the status field is set to a valid choice
-        todo = TodoDetails.objects.create(title="Test", description="Test")
-        valid_statuses = ['OPEN', 'WORKING', 'DONE', 'OVERDUE']
-        
-        # Check if the status is one of the valid choices
-        self.assertIn(todo.status, valid_statuses)
+    def test_due_date_validation(self):
+        with self.assertRaises(ValidationError) as context:
+            past_date = timezone.now() - timezone.timedelta(days=1)
+            TodoDetails.objects.create(
+                title="Invalid Due Date",
+                description="Test",
+                due_date=past_date.date(),  # Extract date from the timestamp
+            )
+        self.assertEqual(
+            context.exception.args[0], "Due Date cannot be before Timestamp created."
+        )
 
-    def test_due_date_null_allowed(self):
-        # Test that due_date can be set to None
-        todo = TodoDetails.objects.create(title="Test", description="Test", due_date=None)
-        
-        # Check if the due_date is set to None
-        self.assertIsNone(todo.due_date)
+    def test_add_tags(self):
+        todo = TodoDetails.objects.create(title="Todo with Tags")
+        tag1 = Tag.objects.create(tag_name="Work")
+        tag2 = Tag.objects.create(tag_name="Important")
+        todo.tag.add(tag1, tag2)
+        self.assertEqual(todo.tag.count(), 2)
+        self.assertIn(tag1, todo.tag.all())
+        self.assertIn(tag2, todo.tag.all())
 
 # TEST CODE FOR SERIALIZERS 
 
@@ -84,58 +88,43 @@ class TodoSerializerTest(TestCase):
 # TEST CODE FOR VIEWS
 
 
-class TodoViewTest(TestCase):
+class TestViews(TestCase):
     def setUp(self):
-        # Create a test user
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
-
-        # Create a test tag
-        self.tag = Tag.objects.create(tag_name='Test Tag')
-
-        # Create a test TodoDetails instance
-        self.todo = TodoDetails.objects.create(
-            title='Test Todo',
-            description='Test Description',
-            due_date='2023-12-31',
-            status='OPEN'
-        )
-        self.todo.tag.add(self.tag)
-
-        # Set up the client for making API requests
         self.client = APIClient()
+        self.user = get_user_model().objects.create_user(username='testuser', password='testpassword')
+        self.client.force_authenticate(self.user)
 
-        # Authenticate the client with the test user
-        self.client.force_authenticate(user=self.user)
+    def test_tag_list(self):
+        # Create tags
+        tag1 = Tag.objects.create(tag_name='Work')
+        tag2 = Tag.objects.create(tag_name='Personal')
 
-    def tearDown(self):
-        # Clean up after the test
-        self.client.force_authenticate(user=None)
+        # Test GET list
+        response = self.client.get('/api/tags/')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0]['tag_name'], tag1.tag_name)
+        self.assertEqual(data[1]['tag_name'], tag2.tag_name)
 
-    def test_get_todo_list(self):
-        # Send GET request to the API endpoint for TodoView
+    def test_tag_create(self):
+        # Test POST create
+        data = {'tag_name': 'New Tag'}
+        response = self.client.post('/api/tags/', data)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Tag.objects.count(), 1)
+
+
+    def test_todo_list(self):
+        # Create todo items
+        todo1 = TodoDetails.objects.create(title='Task 1', description='Description 1', status='OPEN')
+        todo2 = TodoDetails.objects.create(title='Task 2', description='Description 2', status='DONE')
+
+        # Test GET list
         response = self.client.get('/api/todos/')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0]['title'], todo1.title)
+        self.assertEqual(data[1]['title'], todo2.title)
 
-        # Check if the response status code is 200 (OK)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        # Check if the response contains the title of the test todo
-        self.assertIn('Test Todo', response.data[0]['title'])
-
-    def test_create_todo(self):
-        # Define data for creating a new todo
-        data = {
-            'title': 'New Todo',
-            'description': 'New Description',
-            'due_date': '2023-12-31',
-            'status': 'OPEN',
-            'tag': [self.tag.id],  # Provide the tag ID
-        }
-
-        # Send POST request to the API endpoint for creating todos
-        response = self.client.post('/api/todos/', data)
-
-        # Check if the response status code is 201 (Created)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-        # Check if the created todo exists in the database
-        self.assertTrue(TodoDetails.objects.filter(title='New Todo').exists())

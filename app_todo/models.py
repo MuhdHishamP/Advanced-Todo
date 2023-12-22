@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 # Create your models here.
 class tag(models.Model):
@@ -15,5 +17,17 @@ class TodoDetails(models.Model):
     tag = models.ManyToManyField(tag,blank=True)
     status = models.CharField(max_length=10,choices=(('OPEN','Open'),('WORKING','Working'),('DONE','Done'),('OVERDUE','Overdue')),default='OPEN',null=False)
 
+    def save(self, *args, **kwargs):
+
+        self.timestamp = timezone.now()
+
+        # Check if Due Date is before Timestamp created
+        if self.due_date and self.due_date < self.timestamp.date():
+            raise ValidationError("Due Date cannot be before Timestamp created.")
+
+        # Call the parent class's save method
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+    
