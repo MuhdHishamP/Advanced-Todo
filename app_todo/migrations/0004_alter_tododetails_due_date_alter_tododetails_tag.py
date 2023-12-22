@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='tododetails',
-            name='tag',
-            field=models.ManyToManyField(blank=True, null=True,
-                                           to='app_todo.tag'),
+            name='tag', # noqa: E501
+            field=models.ManyToManyField(blank=True, null=True, # noqa: E501
+                                           to='app_todo.tag'), # noqa: E501
         ),
     ]
