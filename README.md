@@ -31,11 +31,14 @@ Access the app at - [Todo DRF](https://todo-app-jade-sigma.vercel.app/api/todos/
 - **Password:** hnfhnfhnf
 
 ## API Endpoints
-- **CREATE:** POST at `/api/todo/`
-- **READ one:** GET at `/api/todo/{id}/`
-- **READ all:** GET at `/api/todo/`
-- **UPDATE:** PUT at `/api/todo/{id}/`
-- **DELETE:** DELETE at `/api/todo/{id}/`
+- **CREATE a Todo item:** POST at `/todo/`
+- **READ one Todo item:** GET at `/todo/{id}/`
+- **READ all Todo items:** GET at `/todo/`
+- **UPDATE a Todo item:** PUT at `/todo/{id}/`
+- **DELETE a Todo item:** DELETE at `/todo/{id}/`
+- **CREATE a Todo item:** POST at `/tags/`
+- **DELETE a Todo item:** DELETE at `/tags/{id}/`
+
   
 Use Basic Authentication for API requests.
 
