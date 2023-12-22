@@ -35,5 +35,5 @@ jobs:
       - name: Format with Black
         run: black .
 
-      # - name: Lint with Flake8
-      #   run: flake8 .
+      - name: Lint with Flake8
+        run: flake8 .
