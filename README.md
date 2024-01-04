@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the backend code for a simple To-Do List application implemented using Django. I have deployed the Postgres database on Railway and the Django app on Vercel to complete this project.
+This repository contains the backend code for a simple To-Do List application implemented using Django. I have used a Postgres database for this project. I have also deployed the Postgres database on Railway and the Django app on Vercel to complete this project.
 
 
 ## Installation
@@ -36,8 +36,8 @@ Access the app at - [Todo DRF](https://todo-app-jade-sigma.vercel.app/api/todos/
 - **READ all Todo items:** GET at `/todo/`
 - **UPDATE a Todo item:** PUT at `/todo/{id}/`
 - **DELETE a Todo item:** DELETE at `/todo/{id}/`
-- **CREATE a Todo item:** POST at `/tags/`
-- **DELETE a Todo item:** DELETE at `/tags/{id}/`
+- **CREATE a Tag :** POST at `/tags/`
+- **DELETE a Tag :** DELETE at `/tags/{id}/`
 
   
 Used Basic Authentication for API requests.
