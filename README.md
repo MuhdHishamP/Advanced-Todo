@@ -1,8 +1,8 @@
-# Django To-Do List App
+# AlgoBulls Backend Developer (Web) Coding Assignment - Django To-Do List App
 
 ## Overview
 
-This repository contains the backend code for a simple To-Do List application implemented using Django.
+This repository contains the backend code for a simple To-Do List application implemented using Django. I have deployed the Postgres database on Railway and the Django app on Vercel to complete this project.
 
 
 ## Installation
@@ -19,20 +19,28 @@ Run the Django development server:
 python manage.py runserver
 ```
 ## Access the app
-Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+Access the app at - [Todo DRF](https://todo-app-jade-sigma.vercel.app/api/todos/) and [Tags DRF of Todo list items](https://todo-app-jade-sigma.vercel.app/api/tags/) (Credentials are given below).
+
+- **Username:** hisham 
+- **Password:** hnfhnfhnf
+
 
 ## Django Admin
-- **URL:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-- **Credentials:** admin/admin
+- **URL:** [Django Admin URL](https://todo-app-jade-sigma.vercel.app/admin) (Credentials are given below).
+- **Username:** hisham 
+- **Password:** hnfhnfhnf
 
 ## API Endpoints
-- **CREATE:** POST at `/api/todo/`
-- **READ one:** GET at `/api/todo/{id}/`
-- **READ all:** GET at `/api/todo/`
-- **UPDATE:** PUT at `/api/todo/{id}/`
-- **DELETE:** DELETE at `/api/todo/{id}/`
+- **CREATE a Todo item:** POST at `/todo/`
+- **READ one Todo item:** GET at `/todo/{id}/`
+- **READ all Todo items:** GET at `/todo/`
+- **UPDATE a Todo item:** PUT at `/todo/{id}/`
+- **DELETE a Todo item:** DELETE at `/todo/{id}/`
+- **CREATE a Todo item:** POST at `/tags/`
+- **DELETE a Todo item:** DELETE at `/tags/{id}/`
+
   
-Use Basic Authentication for API requests.
+Used Basic Authentication for API requests.
 
 ## Coverage Summary
 
@@ -42,7 +50,7 @@ Use Basic Authentication for API requests.
 
 
 ## Testing
-Run tests:
+Run tests using:
 
 ```bash
 python manage.py test
@@ -50,7 +58,7 @@ python manage.py test
 
 # Continuous Integration
 
-GitHub Actions automatically run tests and linting on every commit push.
+GitHub Actions are used to automatically run tests and linting on every commit push.
 
 
 
